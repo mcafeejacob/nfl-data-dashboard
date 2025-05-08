@@ -39,7 +39,20 @@ threshold_breakdowns = {
 
 @st.cache_data
 def load_data():
-    return nfl.import_weekly_data(years=[2024])
+    with st.spinner("Loading weekly NFL data..."):
+        return nfl.import_weekly_data(
+            years=[2024],
+            columns=[
+                'season', 'week', 'season_type', 'position',
+                'player_id', 'player_name', 'player_display_name',
+                'headshot_url', 'team', 'opponent_team',
+                'completions', 'attempts', 'passing_yards', 'passing_tds', 'interceptions',
+                'carries', 'rushing_yards', 'rushing_tds',
+                'receptions', 'targets', 'receiving_yards', 'receiving_tds', 'receiving_fumbles',
+                'fantasy_points', 'fantasy_points_ppr'
+            ],
+            downcast=True
+        )
 
 df = load_data()
 
